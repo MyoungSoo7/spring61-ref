@@ -16,10 +16,12 @@ import java.util.stream.Collectors;
 public class WebApiExRateProvider implements ExRateProvider {
 
     @Override
-    public BigDecimal getExRate(String currency) throws IOException {
-
+    public BigDecimal getExRate(String currency)   {
         String url = "https://open.er-api.com/v6/latest/"+ currency;
+        return runApiForExRate(url);
+    }
 
+    private static BigDecimal runApiForExRate(String url) {
         URI uri;
         try {
             uri = new URI(url);
@@ -29,21 +31,25 @@ public class WebApiExRateProvider implements ExRateProvider {
 
         String response;
         try {
-            response = getString(uri);
+            response = executeApi(uri);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
 
         try {
-            return getBigDecimal(response);
-        } catch (Exception e) {
+            return extractExRate(response);
+        } catch (JsonProcessingException e) {
             throw new RuntimeException(e);
         }
-
-
     }
 
-    private static String getString(URI uri) throws IOException {
+    private static BigDecimal extractExRate(String response) throws JsonProcessingException {
+        ObjectMapper mapper = new ObjectMapper();
+        ExRateData exRateData = mapper.readValue(response, ExRateData.class);
+        return exRateData.rates().get("KRW");
+    }
+
+    private static String executeApi(URI uri) throws IOException {
         String response;
         HttpURLConnection connection = (HttpURLConnection) uri.toURL().openConnection();
         try(BufferedReader br = new BufferedReader(new InputStreamReader(connection.getInputStream())) ){
@@ -52,9 +58,5 @@ public class WebApiExRateProvider implements ExRateProvider {
         return response;
     }
 
-    private static BigDecimal getBigDecimal(String response) throws JsonProcessingException {
-        ObjectMapper mapper = new ObjectMapper();
-        ExRateData exRateData = mapper.readValue(response, ExRateData.class);
-        return exRateData.rates().get("KRW");
-    }
+
 }
