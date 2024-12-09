@@ -2,6 +2,7 @@ package lms.spring61ref.exrate;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import lms.spring61ref.api.SimpleApiExecutor;
 import lms.spring61ref.payment.ExRateProvider;
 
 import java.io.BufferedReader;
@@ -31,7 +32,7 @@ public class WebApiExRateProvider implements ExRateProvider {
 
         String response;
         try {
-            response = executeApi(uri);
+            response = new SimpleApiExecutor().executeApi(uri);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
