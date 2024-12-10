@@ -1,5 +1,6 @@
 package lms.spring61ref;
 
+import lms.spring61ref.config.PaymentConfig;
 import org.springframework.beans.factory.BeanFactory;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import lms.spring61ref.payment.Payment;

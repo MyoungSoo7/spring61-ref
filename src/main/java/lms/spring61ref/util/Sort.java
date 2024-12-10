@@ -1,4 +1,4 @@
-package lms.spring61ref;
+package lms.spring61ref.util;
 
 import java.util.List;
 

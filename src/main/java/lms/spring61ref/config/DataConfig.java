@@ -1,15 +1,17 @@
-package lms.spring61ref;
+package lms.spring61ref.config;
 
 import jakarta.persistence.EntityManagerFactory;
 import lms.spring61ref.data.OrderRepository;
+import org.springframework.beans.factory.config.BeanPostProcessor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseBuilder;
 import org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseType;
+import org.springframework.orm.jpa.JpaTransactionManager;
 import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
+import org.springframework.orm.jpa.support.PersistenceAnnotationBeanPostProcessor;
 import org.springframework.orm.jpa.vendor.Database;
 import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
-
 import javax.sql.DataSource;
 
 @Configuration
@@ -34,10 +36,14 @@ public class DataConfig {
     }
 
     @Bean
-    public OrderRepository orderRepository(EntityManagerFactory entityManagerFactory) {
-        return new OrderRepository(entityManagerFactory);
+    public BeanPostProcessor persistAtnnotaionBeanPostProcessor() {
+        return new PersistenceAnnotationBeanPostProcessor();
     }
 
+    @Bean
+    public JpaTransactionManager transactionManager(EntityManagerFactory emf) {
+        return new JpaTransactionManager(emf);
+    }
 
 }
 

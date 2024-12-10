@@ -1,7 +1,6 @@
 package lms.spring61ref.order;
 
 import jakarta.persistence.*;
-
 import java.math.BigDecimal;
 
 @Entity
@@ -17,7 +16,6 @@ public class Order {
 
     public Order() {
     }
-
 
     public Order(String no, BigDecimal total) {
         this.no = no;

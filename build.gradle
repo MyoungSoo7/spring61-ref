@@ -17,6 +17,11 @@ repositories {
     mavenCentral()
 }
 
+compileJava.options.encoding = 'UTF-8'
+tasks.withType(JavaCompile) {
+    options.encoding = 'UTF-8'
+}
+
 dependencies {
     implementation 'org.springframework.boot:spring-boot-starter'
     implementation 'org.springframework.boot:spring-boot-starter-json'
@@ -29,4 +34,7 @@ dependencies {
 
 tasks.named('test') {
     useJUnitPlatform()
+}
+bootJar {
+    archiveFileName = 'app.jar'
 }
