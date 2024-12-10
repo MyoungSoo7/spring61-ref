@@ -13,7 +13,7 @@ public class Client {
     public static void main(String[] args) throws IOException, InterruptedException {
 
         // IOC
-        BeanFactory objectFactory =  new AnnotationConfigApplicationContext(ObjectFactory.class);
+        BeanFactory objectFactory =  new AnnotationConfigApplicationContext(PaymentConfig.class);
         // DI
         PaymentService paymentService = objectFactory.getBean(PaymentService.class);
         // IOC,DI 스프링 컨테이너
