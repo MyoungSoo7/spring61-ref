@@ -13,7 +13,7 @@ public class DataClient {
         BeanFactory beanFactory = new AnnotationConfigApplicationContext(OrderConfig.class);
         OrderService orderService = beanFactory.getBean(OrderService.class);
 
-
+        System.out.println("한글");
         Order order = orderService.createOrder("100", BigDecimal.TEN);
         System.out.println(order);
 
