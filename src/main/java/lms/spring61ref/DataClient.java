@@ -12,7 +12,7 @@ public class DataClient {
     public static void main(String[] args) throws Exception {
         BeanFactory beanFactory = new AnnotationConfigApplicationContext(OrderConfig.class);
         OrderServiceImpl orderServiceImpl = beanFactory.getBean(OrderServiceImpl.class);
-
+        //-Dfile.encoding="UTF-8" -Dsun.stderr.encoding="UTF-8" -Dsun.stdout.encoding="UTF-8"
         System.out.println("한글");
         Order order = orderServiceImpl.createOrder("100", BigDecimal.TEN);
         System.out.println(order);
