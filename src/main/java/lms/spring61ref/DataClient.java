@@ -2,6 +2,7 @@ package lms.spring61ref;
 
 import lms.spring61ref.config.OrderConfig;
 import lms.spring61ref.order.Order;
+import lms.spring61ref.order.OrderService;
 import lms.spring61ref.order.OrderServiceImpl;
 import org.springframework.beans.factory.BeanFactory;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
@@ -9,9 +10,9 @@ import java.math.BigDecimal;
 
 public class DataClient {
 
-    public static void main(String[] args) throws Exception {
+    public static void main(String[] args)   {
         BeanFactory beanFactory = new AnnotationConfigApplicationContext(OrderConfig.class);
-        OrderServiceImpl orderServiceImpl = beanFactory.getBean(OrderServiceImpl.class);
+        OrderService orderServiceImpl = beanFactory.getBean(OrderService.class);
         //-Dfile.encoding="UTF-8" -Dsun.stderr.encoding="UTF-8" -Dsun.stdout.encoding="UTF-8"
         System.out.println("한글");
         Order order = orderServiceImpl.createOrder("100", BigDecimal.TEN);

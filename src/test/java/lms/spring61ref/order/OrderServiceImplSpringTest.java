@@ -20,7 +20,7 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 @ContextConfiguration(classes = {OrderConfig.class})
 public class OrderServiceImplSpringTest {
     @Autowired
-    private OrderServiceImpl orderServiceImpl;
+    private OrderService orderServiceImpl;
     @Autowired
     DataSource dataSource;
 
