@@ -18,15 +18,15 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 @ExtendWith(SpringExtension.class)
 @ContextConfiguration(classes = {OrderConfig.class})
-public class OrderServiceSpringTest {
+public class OrderServiceImplSpringTest {
     @Autowired
-    private OrderService orderService;
+    private OrderServiceImpl orderServiceImpl;
     @Autowired
     DataSource dataSource;
 
     @Test
     public void createOrder() {
-        var order = orderService.createOrder("100", BigDecimal.TEN);
+        var order = orderServiceImpl.createOrder("100", BigDecimal.TEN);
         assertThat(order.getId()).isGreaterThan(0);
     }
 
@@ -37,7 +37,7 @@ public class OrderServiceSpringTest {
                 new OrderReq("102", BigDecimal.TEN)
         );
 
-        var orders = orderService.listOrders(orderReqs);
+        var orders = orderServiceImpl.listOrders(orderReqs);
 
         assertThat(orders).hasSize(2);
         orders.forEach(order -> assertThat(order.getId()).isGreaterThan(0) );
@@ -51,7 +51,7 @@ public class OrderServiceSpringTest {
                 new OrderReq("101", BigDecimal.TEN)
         );
 
-        assertThatThrownBy(() ->orderService.listOrders(orderReqs)).isInstanceOf(DataIntegrityViolationException.class);
+        assertThatThrownBy(() -> orderServiceImpl.listOrders(orderReqs)).isInstanceOf(DataIntegrityViolationException.class);
         //orders.forEach(order -> assertThat(order.getId()).isGreaterThan(0) );
 
         JdbcClient client = JdbcClient.create(dataSource);
