@@ -1,8 +1,8 @@
 package lms.spring61ref.order;
 
-import lms.spring61ref.spring6.config.OrderConfig;
-import lms.spring61ref.spring6.order.OrderReq;
-import lms.spring61ref.spring6.order.OrderService;
+import lms.spring61ref.spring.config.OrderConfig;
+import lms.spring61ref.spring.order.OrderReq;
+import lms.spring61ref.spring.order.OrderService;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
